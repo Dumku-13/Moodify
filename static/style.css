@@ -1,0 +1,278 @@
+/* ===== Reset ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root{
+  --bg:#000;
+  --spotify:#1DB954;
+  --muted:#bfc7c3;
+  --ease:cubic-bezier(.2,.9,.2,1);
+}
+
+/* ===== Base ===== */
+html,body{
+  height:100%;
+  background:#000;
+  font-family:"Poppins",sans-serif;
+  color:#fff;
+}
+
+/* ===== Topbar ===== */
+.topbar{
+  max-width:1100px;
+  margin:20px auto;
+  padding:0 14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.brand h1{ color:var(--spotify); }
+.brand .tag{ color:var(--muted); font-size:12px; }
+
+.favs-btn{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  padding:8px 14px;
+  border-radius:10px;
+  color:var(--muted);
+  cursor:pointer;
+}
+.favs-btn:hover{ color:var(--spotify); }
+
+/* ===== Card ===== */
+.card{
+  max-width:1100px;
+  margin:20px auto;
+  padding:20px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:14px;
+}
+
+/* ===== Controls ===== */
+.controls{
+  display:flex;
+  gap:10px;
+}
+#mood{
+  flex:1;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.07);
+  color:#fff;
+}
+#go{
+  padding:12px 16px;
+  border:none;
+  border-radius:10px;
+  background:var(--spotify);
+  font-weight:600;
+  cursor:pointer;
+}
+#go:hover{ transform:translateY(-2px); }
+
+/* ===== Results Grid ===== */
+#results{
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:14px;
+}
+
+/* ===== Song Card ===== */
+.song-card{
+  display:flex;
+  gap:10px;
+  padding:12px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:10px;
+  transform:translateY(10px);
+  opacity:0;
+  animation:fadeIn 0.4s var(--ease) forwards;
+}
+.song-card:hover{
+  transform:translateY(-4px);
+}
+
+/* fade animation */
+@keyframes fadeIn{
+  to{ opacity:1; transform:translateY(0); }
+}
+
+/* album art */
+.album-art{
+  width:72px;
+  height:72px;
+  border-radius:8px;
+  object-fit:cover;
+}
+
+/* text */
+.song-mid{ flex:1; }
+.song-title{
+  font-size:15px;
+  font-weight:600;
+}
+.song-
+/* ===== Reset ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root{
+  --bg:#000;
+  --spotify:#1DB954;
+  --muted:#bfc7c3;
+  --ease:cubic-bezier(.2,.9,.2,1);
+}
+
+/* ===== Base ===== */
+html,body{
+  height:100%;
+  background:#000;
+  font-family:"Poppins",sans-serif;
+  color:#fff;
+}
+
+/* ===== Topbar ===== */
+.topbar{
+  max-width:1100px;
+  margin:20px auto;
+  padding:0 14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.brand h1{ color:var(--spotify); }
+.brand .tag{ color:var(--muted); font-size:12px; }
+
+.favs-btn{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  padding:8px 14px;
+  border-radius:10px;
+  color:var(--muted);
+  cursor:pointer;
+}
+.favs-btn:hover{ color:var(--spotify); }
+
+/* ===== Card ===== */
+.card{
+  max-width:1100px;
+  margin:20px auto;
+  padding:20px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:14px;
+}
+
+/* ===== Controls ===== */
+.controls{
+  display:flex;
+  gap:10px;
+}
+#mood{
+  flex:1;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.07);
+  color:#fff;
+}
+#go{
+  padding:12px 16px;
+  border:none;
+  border-radius:10px;
+  background:var(--spotify);
+  font-weight:600;
+  cursor:pointer;
+}
+#go:hover{ transform:translateY(-2px); }
+
+/* ===== Results Grid ===== */
+#results{
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:14px;
+}
+
+/* ===== Song Card ===== */
+.song-card{
+  display:flex;
+  gap:10px;
+  padding:12px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:10px;
+  transform:translateY(10px);
+  opacity:0;
+  animation:fadeIn 0.4s var(--ease) forwards;
+}
+.song-card:hover{
+  transform:translateY(-4px);
+}
+
+/* fade animation */
+@keyframes fadeIn{
+  to{ opacity:1; transform:translateY(0); }
+}
+
+/* album art */
+.album-art{
+  width:72px;
+  height:72px;
+  border-radius:8px;
+  object-fit:cover;
+}
+
+/* text */
+.song-mid{ flex:1; }
+.song-title{
+  font-size:15px;
+  font-weight:600;
+}
+.song-artist{
+  font-size:13px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+/* actions */
+.song-actions{
+  margin-top:6px;
+  display:flex;
+  gap:8px;
+}
+.song-link{
+  color:var(--spotify);
+  font-size:13px;
+  text-decoration:none;
+}
+.save-heart{
+  background:rgba(255,255,255,0.1);
+  border:none;
+  padding:4px 8px;
+  border-radius:8px;
+  cursor:pointer;
+}
+.save-heart:hover{ background:rgba(255,255,255,0.2); }
+
+/* ===== Favorites Drawer ===== */
+.favorites-drawer{
+  position:fixed;
+  top:20px;
+  right:-380px;
+  width:340px;
+  height:90vh;
+  background:rgba(0,0,0,0.9);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;
+  padding:16px;
+  transition:right 0.4s var(--ease);
+}
+.favorites-drawer.open{
+  right:20px;
+}
+.drawer-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}

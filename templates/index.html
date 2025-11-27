@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Moodify — find songs</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <h1>Moodify</h1>
+      <p class="tag">type a mood — get tunes</p>
+    </div>
+
+    <button id="open-favs" class="favs-btn">Favorites ▸</button>
+  </header>
+
+  <main class="card">
+    <div class="controls">
+      <input id="mood" placeholder="e.g. happy, sad, chill, party" />
+      <button id="go">Get Songs</button>
+    </div>
+
+    <div id="status"></div>
+
+    <section id="results"></section>
+  </main>
+
+  <aside id="favorites-drawer" class="favorites-drawer">
+    <div class="drawer-header">
+      <h3>Favorites</h3>
+      <button id="close-favs">✕</button>
+    </div>
+    <div id="favorites-list" class="favorites-list">
+      <p class="empty">No favorites yet — save a song with the heart icon.</p>
+    </div>
+  </aside>
+
+  <!-- THIS SCRIPT IS WHAT SENDS THE /search REQUEST -->
+  <script>
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    document.getElementById("go").onclick = async () => {
+      const mood = document.getElementById("mood").value.trim();
+      if (!mood) return alert("Type a mood");
+
+      document.getElementById("status").textContent = "Searching...";
+
+      const res = await fetch("/search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mood }),
+      });
+
+      const data = await res.json();
+      document.getElementById("status").textContent = "";
+
+      if (res.status !== 200) {
+        document.getElementById("results").innerHTML = "<p>Error fetching songs</p>";
+        return;
+      }
+
+      const html = data.tracks
+        .map(
+          (t, i) => `
+        <div class="song-card" style="--i:${i}">
+          <img src="${t.album_art || "https://via.placeholder.com/72"}" class="album-art">
+
+          <div class="song-mid">
+            <div class="song-title">${escapeHtml(t.name)}</div>
+            <div class="song-artist">${escapeHtml(t.artists)}</div>
+
+            <div class="song-actions">
+              <a class="song-link" target="_blank" href="${t.spotify_url}">Open in Spotify</a>
+              <button class="save-heart" data-track-id="${t.id}">♡</button>
+            </div>
+          </div>
+        </div>`
+        )
+        .join("");
+
+      document.getElementById("results").innerHTML = html;
+    };
+  </script>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
