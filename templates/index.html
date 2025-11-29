@@ -14,23 +14,44 @@
   <header class="topbar">
     <div class="brand">
       <h1>Moodify</h1>
-      <p class="tag">type a mood — get tunes</p>
+      <p class="tag">find your vibe → get songs</p>
     </div>
 
     <button id="open-favs" class="favs-btn">Favorites ▸</button>
   </header>
 
   <main class="card">
-    <div class="controls">
-      <input id="mood" placeholder="e.g. happy, sad, chill, party" />
-      <button id="go">Get Songs</button>
+
+    <!-- 🔥 NEW MOOD BUTTONS UI -->
+    <div class="mood-buttons" id="mood-buttons" role="tablist" aria-label="Choose mood">
+      <button class="mood-btn" data-mood="happy" aria-pressed="false">Happy</button>
+      <button class="mood-btn" data-mood="sad" aria-pressed="false">Sad</button>
+      <button class="mood-btn" data-mood="chill" aria-pressed="false">Chill</button>
+      <button class="mood-btn" data-mood="energetic" aria-pressed="false">Energetic</button>
+      <button class="mood-btn" data-mood="romance" aria-pressed="false">Romance</button>
+      <button class="mood-btn" data-mood="study" aria-pressed="false">Study</button>
     </div>
 
-    <div id="status"></div>
+    <!-- 🔥 minimal overlay for loading (your JS toggles .visible) -->
+    <div id="loading-overlay" class="loading-overlay" aria-hidden="true">
+  <div class="eq-wrap" role="status" aria-live="polite">
+    <div class="eq-bars" aria-hidden="true">
+      <span class="bar" style="--h: 0.6"></span>
+      <span class="bar" style="--h: 0.9"></span>
+      <span class="bar" style="--h: 0.4"></span>
+      <span class="bar" style="--h: 0.8"></span>
+      <span class="bar" style="--h: 0.5"></span>
+    </div>
+    <div class="loader-label">Finding tunes…</div>
+  </div>
+</div>
 
+    <div id="status"></div>
     <section id="results"></section>
+
   </main>
 
+  <!-- FAVORITES DRAWER -->
   <aside id="favorites-drawer" class="favorites-drawer">
     <div class="drawer-header">
       <h3>Favorites</h3>
@@ -41,60 +62,8 @@
     </div>
   </aside>
 
-  <!-- THIS SCRIPT IS WHAT SENDS THE /search REQUEST -->
-  <script>
-    function escapeHtml(str) {
-      return String(str || "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
-    }
-
-    document.getElementById("go").onclick = async () => {
-      const mood = document.getElementById("mood").value.trim();
-      if (!mood) return alert("Type a mood");
-
-      document.getElementById("status").textContent = "Searching...";
-
-      const res = await fetch("/search", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mood }),
-      });
-
-      const data = await res.json();
-      document.getElementById("status").textContent = "";
-
-      if (res.status !== 200) {
-        document.getElementById("results").innerHTML = "<p>Error fetching songs</p>";
-        return;
-      }
-
-      const html = data.tracks
-        .map(
-          (t, i) => `
-        <div class="song-card" style="--i:${i}">
-          <img src="${t.album_art || "https://via.placeholder.com/72"}" class="album-art">
-
-          <div class="song-mid">
-            <div class="song-title">${escapeHtml(t.name)}</div>
-            <div class="song-artist">${escapeHtml(t.artists)}</div>
-
-            <div class="song-actions">
-              <a class="song-link" target="_blank" href="${t.spotify_url}">Open in Spotify</a>
-              <button class="save-heart" data-track-id="${t.id}">♡</button>
-            </div>
-          </div>
-        </div>`
-        )
-        .join("");
-
-      document.getElementById("results").innerHTML = html;
-    };
-  </script>
-
+  <!-- your main JS -->
   <script src="{{ url_for('static', filename='script.js') }}"></script>
+
 </body>
 </html>

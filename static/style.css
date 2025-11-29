@@ -276,3 +276,242 @@ html,body{
   justify-content:space-between;
   align-items:center;
 }
+/* -------------------- */
+/* Mood Buttons Section */
+/* -------------------- */
+
+.mood-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 14px;
+  margin-bottom: 25px;
+}
+
+.mood-btn {
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: none;
+  background: #ffffff0f;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.25s ease;
+  backdrop-filter: blur(8px);
+  border: 1px solid #ffffff18;
+}
+
+.mood-btn:hover {
+  background: #ffffff22;
+  transform: translateY(-2px);
+}
+
+.mood-btn:active {
+  transform: scale(0.95);
+}
+
+/* active state (optional style) */
+.mood-btn.active {
+  background: #d44cff;
+  color: #fff;
+  border-color: #ffb0ff;
+}
+
+
+/* -------------------- */
+/* Loading Overlay        */
+/* -------------------- */
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 0, 20, 0.6);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  transition: 0.3s ease;
+}
+
+.loading-overlay.visible {
+  display: flex;
+}
+
+.loader-label {
+  background: #ffffff18;
+  padding: 16px 26px;
+  border-radius: 12px;
+  font-size: 18px;
+  color: #fff;
+  border: 1px solid #ffffff25;
+  box-shadow: 0 0 30px #ff66ff55;
+}
+
+
+/* Equalizer overlay + subtle motion */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 0, 20, 0.6);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  transition: opacity 0.25s ease;
+}
+
+.loading-overlay.visible {
+  display: flex;
+  opacity: 1;
+}
+
+.eq-wrap {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* bars container */
+.eq-bars {
+  display: flex;
+  gap: 8px;
+  align-items: end;
+  height: 56px;
+  padding: 8px;
+}
+
+/* each bar */
+.eq-bars .bar {
+  width: 10px;
+  height: calc(var(--h, 0.6) * 100%);
+  background: linear-gradient(180deg, #ff8af0, #7a00ff);
+  border-radius: 4px;
+  transform-origin: bottom center;
+  animation: eqPulse 900ms ease-in-out infinite;
+  /* stagger via nth-child */
+}
+
+/* stagger timings */
+.eq-bars .bar:nth-child(1) { animation-delay: 0ms; }
+.eq-bars .bar:nth-child(2) { animation-delay: 120ms; }
+.eq-bars .bar:nth-child(3) { animation-delay: 240ms; }
+.eq-bars .bar:nth-child(4) { animation-delay: 360ms; }
+.eq-bars .bar:nth-child(5) { animation-delay: 480ms; }
+
+/* subtle randomization using keyframes scaling */
+@keyframes eqPulse {
+  0%   { transform: scaleY(0.35); opacity: 0.8; }
+  50%  { transform: scaleY(1.05); opacity: 1; }
+  100% { transform: scaleY(0.45); opacity: 0.9; }
+}
+
+.loader-label {
+  margin-top: 10px;
+  background: #ffffff12;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 500;
+  border: 1px solid #ffffff18;
+}
+
+/* song-card tweaks: big album cover on left, ensure responsive */
+.song-card {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+.album-art {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex: 0 0 120px;
+}
+
+.song-mid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.song-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.song-artist {
+  font-size: 14px;
+  color: #ddd;
+}
+
+.song-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.song-link {
+  text-decoration: none;
+  background: #ffffff08;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ffffff14;
+  font-size: 14px;
+}
+
+/* heart button small */
+.save-heart {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* entrance animation helper (your script uses .enter) */
+.song-card.enter {
+  animation: cardIn 420ms cubic-bezier(.2,.9,.2,1) both;
+  transform-origin: left;
+  opacity: 0;
+}
+
+@keyframes cardIn {
+  0% { transform: translateY(10px) scale(0.99); opacity: 0; }
+  60% { transform: translateY(-6px) scale(1.01); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+
+/* score badge (right side of card) */
+.score-badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ffb3ff, #8a2be2);
+  color: #0b0020;
+  box-shadow: 0 6px 18px rgba(138,43,226,0.12);
+  margin-left: auto;
+  align-self: start;
+}
+
+/* small score text under title when space is constrained */
+.score-small {
+  font-size: 12px;
+  color: #dcd6ff;
+  font-weight: 600;
+}
