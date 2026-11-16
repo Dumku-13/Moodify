@@ -5,8 +5,8 @@ get tracks that fit.
 
 ## How it works
 
-- `mood_map.py` maps each mood to Spotify audio-feature targets (energy, valence, tempo, seeds).
-- `app.py` exposes a JSON endpoint that queries Spotify through [Spotipy](https://spotipy.readthedocs.io/) using the client-credentials flow and batches the results.
+- `mood_map.py` maps each mood to target values (valence, energy, danceability, tempo) plus seed genres and tracks.
+- `app.py` has `/search` (plain track search) and `/recommend`, which searches Spotify through [Spotipy](https://spotipy.readthedocs.io/) (client-credentials flow), then scores candidates against the mood's audio-feature targets.
 - `templates/` and `static/` hold the single-page UI.
 
 ## Run it
